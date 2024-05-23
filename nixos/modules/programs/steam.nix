@@ -148,7 +148,7 @@ in {
     '';
 
     protontricks = {
-      enable = lib.mkEnableOption "Protontricks";
+      enable = lib.mkEnableOption "protontricks, ${cfg.protontricks.package.meta.description}";
       package = lib.mkPackageOption pkgs "protontricks" { };
     };
   };
@@ -182,7 +182,7 @@ in {
       cfg.package
       cfg.package.run
     ] ++ lib.optional cfg.gamescopeSession.enable steam-gamescope
-    ++ lib.optional cfg.protontricks.enable protontricks;
+    ++ lib.optional cfg.protontricks.enable (cfg.protontricks.package.override { inherit extraCompatPaths; });
 
     networking.firewall = lib.mkMerge [
       (lib.mkIf (cfg.remotePlay.openFirewall || cfg.localNetworkGameTransfers.openFirewall) {
