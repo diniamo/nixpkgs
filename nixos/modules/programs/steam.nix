@@ -148,7 +148,7 @@ in {
     '';
 
     protontricks = {
-      enable = lib.mkEnableOption "protontricks, ${cfg.protontricks.package.meta.description}";
+      enable = lib.mkEnableOption "protontricks, a simple wrapper for running Winetricks commands for Proton-enabled games";
       package = lib.mkPackageOption pkgs "protontricks" { };
     };
   };
