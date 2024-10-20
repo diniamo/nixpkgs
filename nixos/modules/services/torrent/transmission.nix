@@ -134,7 +134,7 @@ in
           };
           options.umask = mkOption {
             type = types.str;
-            default = "002";
+            default = "022";
             description = ''
               Sets transmission's file mode creation mask.
               See the umask(2) manpage for more information.
