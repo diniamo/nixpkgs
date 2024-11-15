@@ -35,6 +35,8 @@ buildDotnetModule (finalAttrs: {
   projectFile = "Shoko.CLI/Shoko.CLI.csproj";
   executables = [ "Shoko.CLI" ];
 
+  dotnetBuildFlags = "/p:InformationalVersion=\"channel=stable\"";
+
   passthru.tests.shokoserver = nixosTests.shokoserver;
 
   meta = {
