@@ -66,6 +66,9 @@
   moonlight,
   withTTS ? true,
   enableAutoscroll ? false,
+  # Disabling this will most likely break Discord.
+  # Do so only if you know what you are doing.
+  disableUpdates ? true,
 }:
 assert lib.assertMsg (
   !(withMoonlight && withVencord)
@@ -180,7 +183,7 @@ stdenv.mkDerivation rec {
         ${lib.strings.optionalString enableAutoscroll "--add-flags \"--enable-blink-features=MiddleClickAutoscroll\""} \
         --prefix XDG_DATA_DIRS : "${gtk3}/share/gsettings-schemas/${gtk3.name}/" \
         --prefix LD_LIBRARY_PATH : ${libPath}:$out/opt/${binaryName} \
-        --run "${lib.getExe disableBreakingUpdates}"
+        ${lib.strings.optionalString disableUpdates "--run ${lib.getExe disableBreakingUpdates}"}
 
     ln -s $out/opt/${binaryName}/${binaryName} $out/bin/
     # Without || true the install would fail on case-insensitive filesystems
